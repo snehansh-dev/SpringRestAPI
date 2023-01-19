@@ -14,4 +14,6 @@ public interface PersonService {
     public Person updateUser(Long userId, Person person);
 
     public String deleteUser(Long userId);
+
+    public Person getUser(String userName);
 }

@@ -30,26 +30,26 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person updateUser(Long userId, Person person) {
         Person persondb = userRepository.findById(userId).get();
-        if(Objects.nonNull(person.getUserFirstName()) &&
-        !"".equalsIgnoreCase(person.getUserFirstName())){
-            persondb.setUserFirstName(person.getUserFirstName());
+        if(Objects.nonNull(person.getPersonFirstName()) &&
+        !"".equalsIgnoreCase(person.getPersonFirstName())){
+            persondb.setPersonFirstName(person.getPersonFirstName());
         }
 
-        if(Objects.nonNull(person.getUserLastName()) &&
-        !"".equalsIgnoreCase(person.getUserLastName())){
-            persondb.setUserLastName(person.getUserLastName());
+        if(Objects.nonNull(person.getPersonLastName()) &&
+        !"".equalsIgnoreCase(person.getPersonLastName())){
+            persondb.setPersonLastName(person.getPersonLastName());
         }
-        if(Objects.nonNull(person.getUserAddress()) &&
-        !"".equalsIgnoreCase(person.getUserAddress())){
-            persondb.setUserAddress(person.getUserAddress());
+        if(Objects.nonNull(person.getPersonAddress()) &&
+        !"".equalsIgnoreCase(person.getPersonAddress())){
+            persondb.setPersonAddress(person.getPersonAddress());
         }
-        if(Objects.nonNull(person.getUserEmail()) &&
-        !"".equalsIgnoreCase(person.getUserEmail())){
-            persondb.setUserEmail(person.getUserEmail());
+        if(Objects.nonNull(person.getPersonEmail()) &&
+        !"".equalsIgnoreCase(person.getPersonEmail())){
+            persondb.setPersonEmail(person.getPersonEmail());
         }
-        if(Objects.nonNull(person.getUserContact()) &&
-        !"".equalsIgnoreCase(person.getUserContact())){
-            persondb.setUserContact(person.getUserContact());
+        if(Objects.nonNull(person.getPersonContact()) &&
+        !"".equalsIgnoreCase(person.getPersonContact())){
+            persondb.setPersonContact(person.getPersonContact());
         }
         return userRepository.save(persondb);
     }
@@ -58,12 +58,17 @@ public class PersonServiceImpl implements PersonService {
     public String deleteUser(Long userId) {
         Person person = userRepository.findById(userId).get();
         String message;
-        if(person.getUserFirstName().isBlank()){
+        if(person.getPersonFirstName().isBlank()){
             message = "Invalid User Id";
         }else{
-            message = "Person: ".concat(person.getUserFirstName()).concat(" ").concat(person.getUserLastName()).concat(" is deleted");
+            message = "Person: ".concat(person.getPersonFirstName()).concat(" ").concat(person.getPersonLastName()).concat(" is deleted");
         }
         userRepository.deleteById(userId);
         return message;
+    }
+
+    @Override
+    public Person getUser(String userName) {
+        return userRepository.findByPersonFirstNameIgnoreCase(userName);
     }
 }
