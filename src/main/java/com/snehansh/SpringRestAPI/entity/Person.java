@@ -28,5 +28,5 @@ public class Person {
     private String personAddress;
     @Email(message = "Provide valid email")
     private String personEmail;
-    private String personContact; //contact
+    private String personContact; //contact 
 }
