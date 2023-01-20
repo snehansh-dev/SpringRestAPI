@@ -67,9 +67,9 @@ public class PersonServiceImpl implements PersonService {
         if(person.getUserFirstName().isBlank()){
             message = "Invalid User Id";
         }else{
+            userRepository.deleteById(userId);
             message = "Person: ".concat(person.getUserFirstName()).concat(" ").concat(person.getUserLastName()).concat(" is deleted");
         }
-        userRepository.deleteById(userId);
         return message;
     }
 }
