@@ -1,6 +1,7 @@
 package com.snehansh.SpringRestAPI.controller;
 
 import com.snehansh.SpringRestAPI.entity.Person;
+import com.snehansh.SpringRestAPI.error.PersonNotFoundException;
 import com.snehansh.SpringRestAPI.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class PersonController {
     }
 
     @GetMapping("/user/{id}")
-    public Person getUser(@PathVariable("id") Long userId){
+    public Person getUser(@PathVariable("id") Long userId) throws PersonNotFoundException {
         return userService.getUser(userId);
     }
 

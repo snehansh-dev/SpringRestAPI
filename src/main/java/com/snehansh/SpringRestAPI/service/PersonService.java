@@ -1,6 +1,7 @@
 package com.snehansh.SpringRestAPI.service;
 
 import com.snehansh.SpringRestAPI.entity.Person;
+import com.snehansh.SpringRestAPI.error.PersonNotFoundException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface PersonService {
 
     public List<Person> getUser();
 
-    public Person getUser(Long userId);
+    public Person getUser(Long userId) throws PersonNotFoundException;
 
     public Person updateUser(Long userId, Person person);
 

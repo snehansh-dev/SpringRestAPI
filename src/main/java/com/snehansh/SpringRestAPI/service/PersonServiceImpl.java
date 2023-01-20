@@ -1,12 +1,14 @@
 package com.snehansh.SpringRestAPI.service;
 
 import com.snehansh.SpringRestAPI.entity.Person;
+import com.snehansh.SpringRestAPI.error.PersonNotFoundException;
 import com.snehansh.SpringRestAPI.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -23,8 +25,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getUser(Long userId) {
-        return userRepository.findById(userId).get();
+    public Person getUser(Long userId) throws PersonNotFoundException {
+        Optional<Person> person = userRepository.findById(userId);
+        if(!person.isPresent()){
+            throw new PersonNotFoundException("Person Not available");
+        }
+        return person.get();
     }
 
     @Override
